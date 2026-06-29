@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { Menu, X } from "lucide-react";
 import { useAuthStore } from "../../store/authStore";
 import Button from "../ui/Button";
 import Avatar from "../ui/Avatar";
@@ -58,20 +59,9 @@ export default function Header() {
             type="button"
             onClick={() => setIsMenuOpen((prev) => !prev)}
             className="flex h-10 w-10 items-center justify-center rounded-lg text-text-default hover:bg-surface-subtle md:hidden"
-            aria-label="메뉴 열기"
+            aria-label={isMenuOpen ? "메뉴 닫기" : "메뉴 열기"}
           >
-            {isMenuOpen ? (
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            ) : (
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                <line x1="3" y1="6" x2="21" y2="6" />
-                <line x1="3" y1="12" x2="21" y2="12" />
-                <line x1="3" y1="18" x2="21" y2="18" />
-              </svg>
-            )}
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </div>
