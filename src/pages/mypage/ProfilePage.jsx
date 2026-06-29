@@ -34,8 +34,10 @@ export default function ProfilePage() {
       <h1 className="text-2xl font-bold text-text-strong">마이 프로필</h1>
 
       <div className="mt-8 flex items-center gap-5 rounded-2xl bg-surface-subtle p-6">
-        <div className="relative">
-          <Avatar size="lg" />
+        <div className="relative shrink-0">
+          <span className="lex h-16 w-16 items-center justify-center rounded-full bg-surface-base">
+            <Avatar size="lg" alt={nickname} /> 
+          </span>
           <span className="absolute -bottom-1 -right-1 flex h-7 w-7 items-center justify-center rounded-full bg-surface-base">
             <Pencil size={14} className="text-text-default" />
           </span>
