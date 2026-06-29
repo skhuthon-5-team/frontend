@@ -41,12 +41,7 @@ export default function ProfilePage() {
           </span>
         </div>
         <div>
-          <div className="flex items-center gap-2">
-            <span className="text-xl font-bold text-text-strong">{nickname}</span>
-            <span className="rounded-md bg-surface-inverse px-1.5 py-0.5 text-xs font-bold text-text-on-inverse">
-              LV.{profile.level}
-            </span>
-          </div>
+          <span className="text-xl font-bold text-text-strong">{nickname}</span>
           <p className="mt-1 text-sm text-text-default">
             {job} | 실패를 기록하며 매일 성장합니다.
           </p>
