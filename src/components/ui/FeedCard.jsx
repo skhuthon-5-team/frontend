@@ -1,3 +1,4 @@
+import { Eye, MessageCircle } from "lucide-react";
 import TagChip from "./TagChip";
 import Avatar from "./Avatar";
 
@@ -23,8 +24,14 @@ export default function FeedCard({ post, onClick }) {
           <span className="text-sm text-text-default">{author}</span>
         </div>
         <div className="flex items-center gap-3 text-xs text-text-muted">
-          <span>조회 {views}</span>
-          <span>댓글 {comments}</span>
+          <span className="flex items-center gap-1">
+            <Eye size={14} />
+            {views}
+          </span>
+          <span className="flex items-center gap-1">
+            <MessageCircle size={14} />
+            {comments}
+          </span>
         </div>
       </div>
     </button>
