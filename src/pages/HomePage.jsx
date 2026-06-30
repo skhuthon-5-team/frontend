@@ -58,9 +58,6 @@ export default function HomePage() {
     <div>
       <section className="border-b border-border-default bg-surface-subtle">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-          <span className="inline-flex items-center rounded-full bg-surface-base px-3 py-1 text-xs font-bold tracking-wider text-text-default">
-            BETA SERVICE
-          </span>
           <h1 className="mt-6 text-4xl font-bold leading-tight text-text-strong sm:text-5xl">
             왜 우리는 성공은 공유하면서
             <br />
