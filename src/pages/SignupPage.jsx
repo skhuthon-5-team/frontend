@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuthStore } from "../store/authStore";
 import FormField from "../components/ui/FormField";
 import PasswordField from "../components/ui/PasswordField";
 import Button from "../components/ui/Button";
@@ -8,6 +9,7 @@ const isValidEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 
 export default function SignupPage() {
   const navigate = useNavigate();
+  const login = useAuthStore((state) => state.login);
 
   const [email, setEmail] = useState("");
   const [nickname, setNickname] = useState("");
@@ -26,6 +28,7 @@ export default function SignupPage() {
 
   const handleSubmit = () => {
     if (!canSubmit) return;
+    login({ email, nickname });
     navigate("/signup/complete");
   };
 
@@ -111,7 +114,7 @@ export default function SignupPage() {
           className="w-full"
           onClick={handleGoogleSignup}
         >
-          구글 계정으로 시작하기
+          G 구글 계정으로 시작하기
         </Button>
 
         <p className="mt-8 text-center text-sm text-text-muted">
