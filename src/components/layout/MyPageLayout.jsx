@@ -1,6 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 
-const menu = [
+const MENU = [
   { to: "/mypage", label: "프로필 정보", end: true },
   { to: "/mypage/badges", label: "나의 활동 뱃지" },
   { to: "/mypage/posts", label: "작성한 게시글" },
@@ -10,28 +10,29 @@ const menu = [
 
 export default function MyPageLayout() {
   return (
-    <div className="mx-auto flex max-w-6xl gap-8 px-4 py-8">
-      <aside className="w-48 shrink-0">
+    <div className="mx-auto flex max-w-6xl gap-10 px-4 py-10">
+      <aside className="w-56 shrink-0">
         <nav className="flex flex-col gap-1">
-          {menu.map((item) => (
+          {MENU.map(({ to, label, end }) => (
             <NavLink
-              key={item.to}
-              to={item.to}
-              end={item.end}
+              key={to}
+              to={to}
+              end={end}
               className={({ isActive }) =>
-                `rounded-md px-3 py-2 ${
+                `rounded-lg px-4 py-3 text-sm transition-colors ${
                   isActive
-                    ? "bg-surface-subtle text-text-strong"
-                    : "text-text-muted"
+                    ? "bg-surface-subtle font-bold text-text-strong"
+                    : "text-text-muted hover:text-text-default"
                 }`
               }
             >
-              {item.label}
+              {label}
             </NavLink>
           ))}
         </nav>
       </aside>
-      <section className="flex-1">
+
+      <section className="min-w-0 flex-1">
         <Outlet />
       </section>
     </div>
