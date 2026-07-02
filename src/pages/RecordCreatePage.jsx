@@ -185,6 +185,7 @@ export default function RecordCreatePage() {
             <Button
               variant="primary"
               className="rounded-xl px-10 py-4"
+              disabled={!canSubmit}
               onClick={handleSubmit}
             >
               분석 및 제출하기
