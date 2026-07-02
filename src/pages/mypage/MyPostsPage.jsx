@@ -3,14 +3,14 @@ import { Tag } from "lucide-react";
 import { getMyPosts } from "../../mocks/posts";
 import Button from "../../components/ui/Button";
 
-const posts = getMyPosts();
-
 function UnwrittenCard({ post }) {
   return (
     <div className="flex items-start justify-between gap-6 rounded-2xl bg-surface-subtle p-6">
       <div className="min-w-0">
         <p className="text-xs text-text-muted">{post.date} 기록됨</p>
-        <h3 className="mt-1 text-lg font-bold text-text-strong">{post.title}</h3>
+        <h3 className="mt-1 text-lg font-bold text-text-strong">
+          {post.title}
+        </h3>
         <p className="mt-2 text-sm text-text-default">{post.summary}</p>
         <p className="mt-3 flex items-center gap-1 text-xs text-text-muted">
           <Tag size={12} />
@@ -31,10 +31,14 @@ function WrittenCard({ post }) {
     <div className="grid grid-cols-1 gap-6 rounded-2xl border border-border-default p-6 md:grid-cols-2">
       <div className="min-w-0 border-border-default md:border-r md:pr-6">
         <p className="text-xs text-text-muted">{post.date} 기록됨</p>
-        <h3 className="mt-1 text-lg font-bold text-text-strong">{post.title}</h3>
+        <h3 className="mt-1 text-lg font-bold text-text-strong">
+          {post.title}
+        </h3>
         <div className="mt-3 rounded-lg bg-surface-subtle p-4">
           <p className="text-xs text-text-muted">핵심 실패 원인</p>
-          <p className="mt-1 text-sm font-medium text-text-default">{post.cause}</p>
+          <p className="mt-1 text-sm font-medium text-text-default">
+            {post.cause}
+          </p>
         </div>
       </div>
 
@@ -47,13 +51,17 @@ function WrittenCard({ post }) {
             {post.status}
           </span>
         </div>
-        <h4 className="mt-2 font-bold text-text-strong">"{post.retrospectiveTitle}"</h4>
+        <h4 className="mt-2 font-bold text-text-strong">
+          "{post.retrospectiveTitle}"
+        </h4>
         <p className="mt-2 text-xs text-text-muted">실행한 변화</p>
         <p className="mt-1 text-sm text-text-default">{post.change}</p>
         <div className="mt-4 flex items-end justify-between gap-4">
           <div className="min-w-0">
             <p className="text-xs text-text-muted">현재 상태</p>
-            <p className="mt-1 text-sm font-bold text-text-strong">{post.currentStatus}</p>
+            <p className="mt-1 text-sm font-bold text-text-strong">
+              {post.currentStatus}
+            </p>
           </div>
           <Link to={`/retrospective/${post.id}/detail`} className="shrink-0">
             <Button variant="secondary" className="px-4 py-2 text-xs">
@@ -67,6 +75,8 @@ function WrittenCard({ post }) {
 }
 
 export default function MyPostsPage() {
+  const posts = getMyPosts();
+
   return (
     <div>
       <h1 className="text-2xl font-bold text-text-strong">작성한 게시글</h1>

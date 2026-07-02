@@ -32,6 +32,7 @@ export default function SignupPage() {
     navigate("/signup/complete");
   };
 
+  // TODO: 구글 OAuth 회원가입 연동
   const handleGoogleSignup = () => {};
 
   return (

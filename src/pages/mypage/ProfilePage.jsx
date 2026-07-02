@@ -6,10 +6,10 @@ import Button from "../../components/ui/Button";
 import FormField from "../../components/ui/FormField";
 import SelectableTagChip from "../../components/ui/SelectableTagChip";
 
-const profile = getProfile();
-const interestOptions = getInterestOptions();
-
 export default function ProfilePage() {
+  const profile = getProfile();
+  const interestOptions = getInterestOptions();
+
   const [nickname, setNickname] = useState(profile.nickname);
   const [job, setJob] = useState(profile.job);
   const [bio, setBio] = useState(profile.bio);
@@ -20,8 +20,8 @@ export default function ProfilePage() {
       prev.includes(tag)
         ? prev.filter((t) => t !== tag)
         : prev.length >= 3
-        ? prev
-        : [...prev, tag]
+          ? prev
+          : [...prev, tag]
     );
   };
 
@@ -35,8 +35,8 @@ export default function ProfilePage() {
 
       <div className="mt-8 flex items-center gap-5 rounded-2xl bg-surface-subtle p-6">
         <div className="relative shrink-0">
-          <span className="lex h-16 w-16 items-center justify-center rounded-full bg-surface-base">
-            <Avatar size="lg" alt={nickname} /> 
+          <span className="flex h-16 w-16 items-center justify-center rounded-full bg-surface-base">
+            <Avatar size="lg" alt={nickname} />
           </span>
           <span className="absolute -bottom-1 -right-1 flex h-7 w-7 items-center justify-center rounded-full bg-surface-base">
             <Pencil size={14} className="text-text-default" />
@@ -48,9 +48,17 @@ export default function ProfilePage() {
             {job} | 실패를 기록하며 매일 성장합니다.
           </p>
           <div className="mt-2 flex gap-4 text-sm text-text-default">
-            <span>팔로워 <b className="text-text-strong">{profile.stats.followers}</b></span>
-            <span>팔로잉 <b className="text-text-strong">{profile.stats.following}</b></span>
-            <span>기록 <b className="text-text-strong">{profile.stats.records}</b></span>
+            <span>
+              팔로워{" "}
+              <b className="text-text-strong">{profile.stats.followers}</b>
+            </span>
+            <span>
+              팔로잉{" "}
+              <b className="text-text-strong">{profile.stats.following}</b>
+            </span>
+            <span>
+              기록 <b className="text-text-strong">{profile.stats.records}</b>
+            </span>
           </div>
         </div>
       </div>
@@ -60,8 +68,16 @@ export default function ProfilePage() {
       <h2 className="text-lg font-bold text-text-strong">상세 정보 수정</h2>
 
       <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2">
-        <FormField label="닉네임" value={nickname} onChange={(e) => setNickname(e.target.value)} />
-        <FormField label="직업 / 소속" value={job} onChange={(e) => setJob(e.target.value)} />
+        <FormField
+          label="닉네임"
+          value={nickname}
+          onChange={(e) => setNickname(e.target.value)}
+        />
+        <FormField
+          label="직업 / 소속"
+          value={job}
+          onChange={(e) => setJob(e.target.value)}
+        />
       </div>
 
       <div className="mt-5">

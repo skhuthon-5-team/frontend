@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import Avatar from "../components/ui/Avatar";
 import Button from "../components/ui/Button";
+import Stat from "../components/ui/Stat";
 import { getUserProfile, profileTabs } from "../mocks/userProfile";
 
 const badgeIcons = {
@@ -79,9 +80,17 @@ export default function UserProfilePage() {
             <p className="mt-2 text-sm text-text-default">{profile.bio}</p>
 
             <div className="mt-6 flex flex-wrap items-center gap-8">
-              <Stat label="POSTS" value={profile.stats.posts} />
-              <Stat label="FOLLOWERS" value={profile.stats.followers} />
-              <Stat label="FOLLOWING" value={profile.stats.following} />
+              <Stat label="POSTS" value={profile.stats.posts} size="lg" />
+              <Stat
+                label="FOLLOWERS"
+                value={profile.stats.followers}
+                size="lg"
+              />
+              <Stat
+                label="FOLLOWING"
+                value={profile.stats.following}
+                size="lg"
+              />
               <div>
                 <p className="text-xs font-medium tracking-wider text-text-muted">
                   BADGES
@@ -266,17 +275,6 @@ export default function UserProfilePage() {
           </div>
         </aside>
       </div>
-    </div>
-  );
-}
-
-function Stat({ label, value }) {
-  return (
-    <div>
-      <p className="text-xs font-medium tracking-wider text-text-muted">
-        {label}
-      </p>
-      <p className="mt-1 text-xl font-bold text-text-strong">{value}</p>
     </div>
   );
 }

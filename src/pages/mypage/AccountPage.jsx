@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { Info } from "lucide-react";
+import { getProfile } from "../../mocks/profile";
 import PasswordField from "../../components/ui/PasswordField";
 import Button from "../../components/ui/Button";
 
-const email = "growth_failer@example.com";
-
-const rules = ["영문, 숫자, 특수문자 포함 8자 이상", "현재 비밀번호와 다르게 설정"];
+const rules = [
+  "영문, 숫자, 특수문자 포함 8자 이상",
+  "현재 비밀번호와 다르게 설정",
+];
 
 export default function AccountPage() {
+  const { email } = getProfile();
   const [current, setCurrent] = useState("");
   const [next, setNext] = useState("");
   const [confirm, setConfirm] = useState("");
@@ -61,7 +64,10 @@ export default function AccountPage() {
         <div className="rounded-lg bg-surface-subtle px-4 py-3">
           <ul className="flex flex-col gap-1.5">
             {rules.map((rule) => (
-              <li key={rule} className="flex items-center gap-2 text-xs text-text-muted">
+              <li
+                key={rule}
+                className="flex items-center gap-2 text-xs text-text-muted"
+              >
                 <span className="h-1.5 w-1.5 rounded-full bg-text-muted" />
                 {rule}
               </li>
@@ -70,7 +76,11 @@ export default function AccountPage() {
         </div>
       </div>
 
-      <Button variant="primary" onClick={handleSubmit} className="mt-8 w-full py-4">
+      <Button
+        variant="primary"
+        onClick={handleSubmit}
+        className="mt-8 w-full py-4"
+      >
         비밀번호 변경하기
       </Button>
     </div>

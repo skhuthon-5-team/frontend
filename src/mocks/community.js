@@ -89,16 +89,24 @@ export const communityPosts = [
 
 // 주간 핫 토픽 (우측 사이드바)
 export const weeklyHotTopics = [
-  { rank: 1, title: "퇴사 고민, 지금이 적기일까요?", views: "4.2k", comments: 128 },
-  { rank: 2, title: "AI 시대, 개발자의 생존 전략", views: "3.8k", comments: 94 },
-  { rank: 3, title: "투자 유치 실패 후 멘탈 관리법", views: "3.1k", comments: 76 },
-];
-
-// 이달의 소통왕 (우측 사이드바)
-export const monthlyCommunicators = [
-  { name: "공감요정", comments: 156 },
-  { name: "인사이트헌터", comments: 142 },
-  { name: "실패기록가", comments: 128 },
+  {
+    rank: 1,
+    title: "퇴사 고민, 지금이 적기일까요?",
+    views: "4.2k",
+    comments: 128,
+  },
+  {
+    rank: 2,
+    title: "AI 시대, 개발자의 생존 전략",
+    views: "3.8k",
+    comments: 94,
+  },
+  {
+    rank: 3,
+    title: "투자 유치 실패 후 멘탈 관리법",
+    views: "3.1k",
+    comments: 76,
+  },
 ];
 
 // 글 작성 - 카테고리 선택
@@ -170,9 +178,21 @@ export const communityPostDetails = {
     tags: ["번아웃", "커리어고민", "주니어개발자", "회고"],
     likes: 42,
     authorOtherPosts: [
-      { title: "신입 시절, 배포 사고로 서버를 날려먹었던 기억", date: "2026.02.15", likes: 156 },
-      { title: "코딩 테스트 10번 낙방 후 깨달은 효율적인 공부법", date: "2026.01.20", likes: 89 },
-      { title: "사이드 프로젝트가 왜 자꾸 중간에 엎어질까?", date: "2025.12.05", likes: 214 },
+      {
+        title: "신입 시절, 배포 사고로 서버를 날려먹었던 기억",
+        date: "2026.02.15",
+        likes: 156,
+      },
+      {
+        title: "코딩 테스트 10번 낙방 후 깨달은 효율적인 공부법",
+        date: "2026.01.20",
+        likes: 89,
+      },
+      {
+        title: "사이드 프로젝트가 왜 자꾸 중간에 엎어질까?",
+        date: "2025.12.05",
+        likes: 214,
+      },
     ],
     comments: [
       {
@@ -220,10 +240,6 @@ export function getPopularTags() {
 
 export function getWeeklyHotTopics() {
   return weeklyHotTopics;
-}
-
-export function getMonthlyCommunicators() {
-  return monthlyCommunicators;
 }
 
 export function getCommunityPost(id) {

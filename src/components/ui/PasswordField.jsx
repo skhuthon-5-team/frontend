@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 
-export default function PasswordField({ label, ...props }) {
+export default function PasswordField({ label, action, ...props }) {
   const [visible, setVisible] = useState(false);
 
   return (
     <label className="flex flex-col gap-2">
-      <span className="text-sm font-bold text-text-strong">{label}</span>
+      <span className="flex items-center justify-between">
+        <span className="text-sm font-bold text-text-strong">{label}</span>
+        {action}
+      </span>
       <div className="relative">
         <input
           type={visible ? "text" : "password"}

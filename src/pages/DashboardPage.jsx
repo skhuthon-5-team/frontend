@@ -1,26 +1,16 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getFeeds, getCategories } from "../mocks/feeds";
 import { getMyRecentRecord } from "../mocks/dashboard";
+import { useFeedList, sortOptions } from "../hooks/useFeedList";
 import Button from "../components/ui/Button";
 import CategoryFilterTabs from "../components/ui/CategoryFilterTabs";
 import FeedCard from "../components/ui/FeedCard";
 import AddRecordCard from "../components/ui/AddRecordCard";
 import Pagination from "../components/ui/Pagination";
+import SortTabs from "../components/ui/SortTabs";
 
 const PAGE_SIZE = 6;
 const filterTabs = ["전체", ...getCategories()];
-
-const sortOptions = [
-  { key: "latest", label: "최신순" },
-  { key: "popular", label: "인기순" },
-];
-
-function parseViews(views) {
-  if (typeof views === "number") return views;
-  const value = parseFloat(views);
-  return views.includes("k") ? value * 1000 : value;
-}
 
 function MyRecentRecordCard({ record, onClick }) {
   return (
@@ -51,46 +41,34 @@ function MyRecentRecordCard({ record, onClick }) {
 
 export default function DashboardPage() {
   const navigate = useNavigate();
-  const allFeeds = getFeeds();
   const myRecentRecord = getMyRecentRecord();
+  // 내 최근 기록은 전용 카드로 노출하므로 일반 피드 목록에서 제외
+  const allFeeds = getFeeds().filter((feed) => feed.id !== myRecentRecord.id);
 
-  const [activeCategory, setActiveCategory] = useState("전체");
-  const [sort, setSort] = useState("latest");
-  const [page, setPage] = useState(1);
+  const {
+    activeCategory,
+    sort,
+    page,
+    setPage,
+    sorted,
+    pagedFeeds,
+    totalPages,
+    isFirstDefaultPage,
+    handleCategoryChange,
+    handleSortChange,
+  } = useFeedList(allFeeds, PAGE_SIZE);
 
-  const filtered = allFeeds.filter(
-    (feed) => activeCategory === "전체" || feed.category === activeCategory
-  );
-
-  const sorted = [...filtered].sort((a, b) => {
-    if (sort === "popular") return parseViews(b.views) - parseViews(a.views);
-    return b.date.localeCompare(a.date);
-  });
-
-  const totalPages = Math.max(1, Math.ceil(sorted.length / PAGE_SIZE));
-  const start = (page - 1) * PAGE_SIZE;
-
-  const isFirstDefaultPage = page === 1 && activeCategory === "전체";
-  const visibleFeeds = isFirstDefaultPage
-    ? sorted.slice(0, 4)
-    : sorted.slice(start, start + PAGE_SIZE);
-
-  const handleCategoryChange = (category) => {
-    setActiveCategory(category);
-    setPage(1);
-  };
-
-  const handleSortChange = (key) => {
-    setSort(key);
-    setPage(1);
-  };
+  // 첫 페이지에는 내 기록 카드 + 새 기록 카드가 함께 들어가므로 피드는 4개만 노출
+  const visibleFeeds = isFirstDefaultPage ? sorted.slice(0, 4) : pagedFeeds;
 
   return (
     <div>
       <section className="border-b border-border-default bg-surface-subtle">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
           <span className="inline-flex items-center gap-2 text-sm">
-            <span className="text-text-muted">오늘은 어떤 배움을 기록할까요?</span>
+            <span className="text-text-muted">
+              오늘은 어떤 배움을 기록할까요?
+            </span>
           </span>
           <h1 className="mt-6 text-4xl font-bold leading-tight text-text-strong sm:text-5xl">
             실패는 더 큰 성공을 위한
@@ -118,26 +96,11 @@ export default function DashboardPage() {
             active={activeCategory}
             onChange={handleCategoryChange}
           />
-          <div className="flex items-center gap-2 text-sm">
-            {sortOptions.map((option, index) => (
-              <span key={option.key} className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => handleSortChange(option.key)}
-                  className={`transition ${
-                    sort === option.key
-                      ? "font-bold text-text-strong"
-                      : "text-text-muted hover:text-text-default"
-                  }`}
-                >
-                  {option.label}
-                </button>
-                {index < sortOptions.length - 1 && (
-                  <span className="text-border-default">|</span>
-                )}
-              </span>
-            ))}
-          </div>
+          <SortTabs
+            options={sortOptions}
+            active={sort}
+            onChange={handleSortChange}
+          />
         </div>
 
         <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

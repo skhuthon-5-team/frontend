@@ -234,7 +234,10 @@ export default function CommunityWritePage() {
         </div>
         <ul className="mt-5 flex flex-col gap-3">
           {writeGuidelines.map((item) => (
-            <li key={item.step} className="flex gap-3 text-sm text-text-default">
+            <li
+              key={item.step}
+              className="flex gap-3 text-sm text-text-default"
+            >
               <span className="font-bold text-text-strong">{item.step}</span>
               <span>{item.text}</span>
             </li>

@@ -1,15 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "../components/ui/Button";
 import { ChevronDown } from "lucide-react";
+import { getCategories } from "../mocks/feeds";
+import { inputOnBase, textareaOnBase } from "../styles/fieldStyles";
+import Button from "../components/ui/Button";
 
-const categories = ["창업", "자기계발", "이직", "인간관계", "공부"];
-
-const inputClass =
-  "w-full rounded-xl border border-border-default bg-surface-base px-4 py-4 text-sm text-text-default placeholder:text-text-muted outline-none transition-colors focus:border-text-strong";
-
-const textareaClass =
-  "w-full resize-none rounded-xl border border-border-default bg-surface-base px-4 py-4 text-sm leading-6 text-text-default placeholder:text-text-muted outline-none transition-colors focus:border-text-strong";
+const categories = getCategories();
 
 export default function RecordCreatePage() {
   const navigate = useNavigate();
@@ -68,7 +64,7 @@ export default function RecordCreatePage() {
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className={`${inputClass} appearance-none ${
+              className={`${inputOnBase} appearance-none ${
                 category ? "text-text-default" : "text-text-muted"
               }`}
             >
@@ -92,7 +88,7 @@ export default function RecordCreatePage() {
             value={situation}
             onChange={(e) => setSituation(e.target.value)}
             placeholder="어떤 상황이었나요? (예: OO기업 최종 면접 탈락)"
-            className={inputClass}
+            className={inputOnBase}
           />
         </label>
 
@@ -105,7 +101,7 @@ export default function RecordCreatePage() {
             value={choice}
             onChange={(e) => setChoice(e.target.value)}
             placeholder="그 상황에서 어떤 결정을 내렸나요?"
-            className={textareaClass}
+            className={textareaOnBase}
           />
         </label>
 
@@ -118,7 +114,7 @@ export default function RecordCreatePage() {
             value={cause}
             onChange={(e) => setCause(e.target.value)}
             placeholder="왜 그런 결과가 나왔다고 생각하시나요?"
-            className={textareaClass}
+            className={textareaOnBase}
           />
         </label>
 
@@ -131,7 +127,7 @@ export default function RecordCreatePage() {
             value={nextAction}
             onChange={(e) => setNextAction(e.target.value)}
             placeholder="다시 그 상황이 온다면 어떻게 행동하시겠습니까?"
-            className={textareaClass}
+            className={textareaOnBase}
           />
         </label>
 
@@ -141,7 +137,8 @@ export default function RecordCreatePage() {
               <div>
                 <p className="text-sm font-bold text-text-strong">공개 여부</p>
                 <p className="mt-1 text-xs text-text-muted">
-                  공개하면 실패 피드에 노출되고, 다른 사용자가 응원할 수 있습니다.
+                  공개하면 실패 피드에 노출되고, 다른 사용자가 응원할 수
+                  있습니다.
                 </p>
               </div>
 

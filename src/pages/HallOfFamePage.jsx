@@ -62,8 +62,8 @@ export default function HallOfFamePage() {
           </h1>
 
           <p className="mt-6 text-base leading-relaxed text-text-muted">
-            단순한 실수를 넘어, 치열한 고민과 회고를 통해 공동체에 영감을 준 '실패
-            로그'들을 선정합니다.
+            단순한 실수를 넘어, 치열한 고민과 회고를 통해 공동체에 영감을 준
+            '실패 로그'들을 선정합니다.
             <br />
             명예의 전당에 오른 기록들은 매주 월요일 업데이트됩니다.
           </p>
@@ -407,9 +407,7 @@ function MonthlyTab({ items }) {
           <div
             key={item.rank}
             className={`grid grid-cols-1 items-center gap-3 px-6 py-4 sm:grid-cols-[3rem_1fr_8rem_6rem_5rem] sm:gap-4 ${
-              index < items.length - 1
-                ? "border-b border-border-default"
-                : ""
+              index < items.length - 1 ? "border-b border-border-default" : ""
             } transition hover:bg-surface-subtle`}
           >
             <span

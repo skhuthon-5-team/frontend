@@ -3,6 +3,7 @@ import { Bookmark, Heart, Lightbulb, Share2 } from "lucide-react";
 import Avatar from "../components/ui/Avatar";
 import Button from "../components/ui/Button";
 import TagChip from "../components/ui/TagChip";
+import Stat from "../components/ui/Stat";
 import { getCommunityPost } from "../mocks/community";
 
 export default function CommunityDetailPage() {
@@ -124,7 +125,9 @@ export default function CommunityDetailPage() {
                 className="w-full resize-none bg-transparent text-sm text-text-default outline-none placeholder:text-text-muted"
               />
               <div className="mt-3 flex items-center justify-between">
-                <span className="text-xs text-text-muted">글자수 제한 1,000자</span>
+                <span className="text-xs text-text-muted">
+                  글자수 제한 1,000자
+                </span>
                 <Button variant="primary" className="rounded-lg px-5 py-2.5">
                   댓글 등록
                 </Button>
@@ -186,7 +189,9 @@ export default function CommunityDetailPage() {
 
           {/* Author other posts */}
           <div className="rounded-2xl border border-border-default p-6">
-            <p className="text-sm font-bold text-text-strong">작성자의 다른 글</p>
+            <p className="text-sm font-bold text-text-strong">
+              작성자의 다른 글
+            </p>
             <ul className="mt-4 flex flex-col divide-y divide-border-default">
               {post.authorOtherPosts.map((item) => (
                 <li key={item.title} className="py-4 first:pt-0 last:pb-0">
@@ -202,17 +207,6 @@ export default function CommunityDetailPage() {
           </div>
         </aside>
       </div>
-    </div>
-  );
-}
-
-function Stat({ label, value }) {
-  return (
-    <div>
-      <p className="text-[10px] font-medium uppercase tracking-wider text-text-muted">
-        {label}
-      </p>
-      <p className="mt-1 text-base font-bold text-text-strong">{value}</p>
     </div>
   );
 }
@@ -271,7 +265,9 @@ function Comment({ comment }) {
                         작성자
                       </span>
                     )}
-                    <span className="text-xs text-text-muted">{reply.date}</span>
+                    <span className="text-xs text-text-muted">
+                      {reply.date}
+                    </span>
                   </div>
                   <p className="mt-1.5 text-sm leading-6 text-text-default">
                     {reply.content}

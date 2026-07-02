@@ -1,10 +1,6 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, Heart, Sparkles } from "lucide-react";
-import {
-  getFeeds,
-  getFeedAiAnalysis,
-  getFeedComments,
-} from "../mocks/feeds";
+import { getFeeds, getFeedAiAnalysis, getFeedComments } from "../mocks/feeds";
 import Avatar from "../components/ui/Avatar";
 import Button from "../components/ui/Button";
 
@@ -18,9 +14,7 @@ export default function FeedDetailPage() {
   const aiAnalysis = getFeedAiAnalysis();
   const comments = getFeedComments();
 
-  const relatedFeeds = feeds
-    .filter((feed) => feed.id !== post.id)
-    .slice(0, 3);
+  const relatedFeeds = feeds.filter((feed) => feed.id !== post.id).slice(0, 3);
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-14">
@@ -65,8 +59,14 @@ export default function FeedDetailPage() {
 
         <ContentSection label="01. 실패 상황" content={post.situation} />
         <ContentSection label="02. 당시 나의 선택" content={post.choice} />
-        <ContentSection label="03. 내가 생각하는 실패 원인" content={post.cause} />
-        <ContentSection label="04. 다음엔 무엇을 바꿀까" content={post.nextAction} />
+        <ContentSection
+          label="03. 내가 생각하는 실패 원인"
+          content={post.cause}
+        />
+        <ContentSection
+          label="04. 다음엔 무엇을 바꿀까"
+          content={post.nextAction}
+        />
 
         <section className="mt-10 rounded-2xl bg-surface-subtle p-6">
           <div className="flex items-center gap-2">
@@ -85,7 +85,10 @@ export default function FeedDetailPage() {
               title="이번 실패에서 얻은 교훈"
               content={aiAnalysis.lesson}
             />
-            <AnalysisCard title="다음 도전 전략" content={aiAnalysis.strategy} />
+            <AnalysisCard
+              title="다음 도전 전략"
+              content={aiAnalysis.strategy}
+            />
           </div>
         </section>
 

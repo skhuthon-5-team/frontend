@@ -51,8 +51,7 @@ export default function CommunityPage() {
           className="shrink-0 rounded-xl px-6 py-4"
           onClick={() => navigate("/community/write")}
         >
-          <PenLine size={18} />
-          새 글 작성하기
+          <PenLine size={18} />새 글 작성하기
         </Button>
       </div>
 

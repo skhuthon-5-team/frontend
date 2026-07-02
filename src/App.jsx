@@ -3,6 +3,7 @@ import { useAuthStore } from "./store/authStore";
 
 import RootLayout from "./components/layout/RootLayout";
 import MyPageLayout from "./components/layout/MyPageLayout";
+import ProtectedRoute from "./components/layout/ProtectedRoute";
 
 import HomePage from "./pages/HomePage";
 import DashboardPage from "./pages/DashboardPage";
@@ -43,17 +44,49 @@ export default function App() {
           <Route path="feed/:id" element={<FeedDetailPage />} />
           <Route path="hall-of-fame" element={<HallOfFamePage />} />
           <Route path="community" element={<CommunityPage />} />
-          <Route path="community/write" element={<CommunityWritePage />} />
+          <Route
+            path="community/write"
+            element={
+              <ProtectedRoute>
+                <CommunityWritePage />
+              </ProtectedRoute>
+            }
+          />
           <Route path="community/:id" element={<CommunityDetailPage />} />
           <Route path="users/:username" element={<UserProfilePage />} />
-          <Route path="record" element={<RecordCreatePage />} />
-          <Route path="retrospective/:id" element={<RetrospectivePage />} />
+          <Route
+            path="record"
+            element={
+              <ProtectedRoute>
+                <RecordCreatePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="retrospective/:id"
+            element={
+              <ProtectedRoute>
+                <RetrospectivePage />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="retrospective/:id/detail"
-            element={<RetrospectiveDetailPage />}
+            element={
+              <ProtectedRoute>
+                <RetrospectiveDetailPage />
+              </ProtectedRoute>
+            }
           />
 
-          <Route path="mypage" element={<MyPageLayout />}>
+          <Route
+            path="mypage"
+            element={
+              <ProtectedRoute>
+                <MyPageLayout />
+              </ProtectedRoute>
+            }
+          >
             <Route index element={<ProfilePage />} />
             <Route path="badges" element={<BadgePage />} />
             <Route path="posts" element={<MyPostsPage />} />

@@ -31,8 +31,12 @@ export default function SignupCompletePage() {
           <span className="flex size-9 items-center justify-center rounded-lg bg-surface-base text-text-strong">
             <PenLine size={18} />
           </span>
-          <p className="mt-4 text-sm font-bold text-text-strong">첫 실패 기록하기</p>
-          <p className="mt-1 text-xs text-text-muted">오늘의 작은 실수를 기록으로 남기세요.</p>
+          <p className="mt-4 text-sm font-bold text-text-strong">
+            첫 실패 기록하기
+          </p>
+          <p className="mt-1 text-xs text-text-muted">
+            오늘의 작은 실수를 기록으로 남기세요.
+          </p>
         </button>
 
         <button
@@ -43,13 +47,21 @@ export default function SignupCompletePage() {
           <span className="flex size-9 items-center justify-center rounded-lg bg-surface-base text-text-strong">
             <Search size={18} />
           </span>
-          <p className="mt-4 text-sm font-bold text-text-strong">피드 둘러보기</p>
-          <p className="mt-1 text-xs text-text-muted">다른 사람들의 회고를 읽어보세요.</p>
+          <p className="mt-4 text-sm font-bold text-text-strong">
+            피드 둘러보기
+          </p>
+          <p className="mt-1 text-xs text-text-muted">
+            다른 사람들의 회고를 읽어보세요.
+          </p>
         </button>
       </div>
 
       <div className="mt-8 flex flex-col gap-3">
-        <Button variant="primary" className="w-full" onClick={() => navigate("/")}>
+        <Button
+          variant="primary"
+          className="w-full"
+          onClick={() => navigate("/")}
+        >
           시작하기
         </Button>
         <Button

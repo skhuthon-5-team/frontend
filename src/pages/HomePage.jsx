@@ -1,56 +1,30 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getFeeds, getCategories } from "../mocks/feeds";
+import { useFeedList, sortOptions } from "../hooks/useFeedList";
 import Button from "../components/ui/Button";
 import CategoryFilterTabs from "../components/ui/CategoryFilterTabs";
 import FeedCard from "../components/ui/FeedCard";
 import AddRecordCard from "../components/ui/AddRecordCard";
 import Pagination from "../components/ui/Pagination";
+import SortTabs from "../components/ui/SortTabs";
 
 const PAGE_SIZE = 3;
 const filterTabs = ["전체", ...getCategories()];
 
-const sortOptions = [
-  { key: "latest", label: "최신순" },
-  { key: "popular", label: "인기순" },
-];
-
-function parseViews(views) {
-  if (typeof views === "number") return views;
-  const value = parseFloat(views);
-  return views.includes("k") ? value * 1000 : value;
-}
-
 export default function HomePage() {
   const navigate = useNavigate();
-  const allFeeds = getFeeds();
 
-  const [activeCategory, setActiveCategory] = useState("전체");
-  const [sort, setSort] = useState("latest");
-  const [page, setPage] = useState(1);
-
-  const filtered = allFeeds.filter(
-    (feed) => activeCategory === "전체" || feed.category === activeCategory
-  );
-
-  const sorted = [...filtered].sort((a, b) => {
-    if (sort === "popular") return parseViews(b.views) - parseViews(a.views);
-    return b.date.localeCompare(a.date);
-  });
-
-  const totalPages = Math.max(1, Math.ceil(sorted.length / PAGE_SIZE));
-  const start = (page - 1) * PAGE_SIZE;
-  const visibleFeeds = sorted.slice(start, start + PAGE_SIZE);
-
-  const handleCategoryChange = (category) => {
-    setActiveCategory(category);
-    setPage(1);
-  };
-
-  const handleSortChange = (key) => {
-    setSort(key);
-    setPage(1);
-  };
+  const {
+    activeCategory,
+    sort,
+    page,
+    setPage,
+    pagedFeeds,
+    totalPages,
+    isFirstDefaultPage,
+    handleCategoryChange,
+    handleSortChange,
+  } = useFeedList(getFeeds(), PAGE_SIZE);
 
   const goToLogin = () => navigate("/login");
 
@@ -83,37 +57,22 @@ export default function HomePage() {
             active={activeCategory}
             onChange={handleCategoryChange}
           />
-          <div className="flex items-center gap-2 text-sm">
-            {sortOptions.map((option, index) => (
-              <span key={option.key} className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => handleSortChange(option.key)}
-                  className={`transition ${
-                    sort === option.key
-                      ? "font-bold text-text-strong"
-                      : "text-text-muted hover:text-text-default"
-                  }`}
-                >
-                  {option.label}
-                </button>
-                {index < sortOptions.length - 1 && (
-                  <span className="text-border-default">|</span>
-                )}
-              </span>
-            ))}
-          </div>
+          <SortTabs
+            options={sortOptions}
+            active={sort}
+            onChange={handleSortChange}
+          />
         </div>
 
         <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {visibleFeeds.map((feed) => (
+          {pagedFeeds.map((feed) => (
             <FeedCard
               key={feed.id}
               post={feed}
               onClick={() => navigate(`/feed/${feed.id}`)}
             />
           ))}
-          {page === 1 && activeCategory === "전체" && (
+          {isFirstDefaultPage && (
             <AddRecordCard
               title="당신의 실패도 기록해보세요."
               subtitle="AI가 성공의 실마리를 찾아줍니다."

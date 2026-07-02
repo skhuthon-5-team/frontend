@@ -71,14 +71,17 @@ export default function RetrospectiveDetailPage() {
                   {latest.result}
                 </span>
                 <span className="text-xs font-medium text-text-muted">
-                  총 {retrospectives.length}회 회고 · 최근 {latest.publishedDate} 발행
+                  총 {retrospectives.length}회 회고 · 최근{" "}
+                  {latest.publishedDate} 발행
                 </span>
               </div>
 
               <h1 className="mt-4 text-4xl font-bold text-text-strong">
                 {record.title}
               </h1>
-              <p className="mt-3 text-base text-text-muted">{record.subtitle}</p>
+              <p className="mt-3 text-base text-text-muted">
+                {record.subtitle}
+              </p>
             </div>
 
             <div className="flex flex-none flex-wrap items-center gap-2">
@@ -167,8 +170,9 @@ export default function RetrospectiveDetailPage() {
               <ol className="flex flex-col gap-2">
                 {retrospectives.map((item, index) => {
                   const active = index === selectedIndex;
-                  const ItemIcon =
-                    (resultMeta[item.result] || resultMeta["진행 중"]).Icon;
+                  const ItemIcon = (
+                    resultMeta[item.result] || resultMeta["진행 중"]
+                  ).Icon;
                   return (
                     <li key={item.round}>
                       <button
@@ -209,7 +213,9 @@ export default function RetrospectiveDetailPage() {
               <p className="text-sm font-bold text-text-strong">
                 {entry.round}차 회고
               </p>
-              <p className="text-xs text-text-muted">{entry.publishedDate} 발행</p>
+              <p className="text-xs text-text-muted">
+                {entry.publishedDate} 발행
+              </p>
             </div>
 
             <section>
@@ -254,7 +260,9 @@ export default function RetrospectiveDetailPage() {
 
                 <div className="flex flex-col justify-center rounded-2xl bg-surface-inverse px-6 py-8 text-text-on-inverse">
                   <p className="text-xs text-text-muted">{meta.summaryLabel}</p>
-                  <p className="mt-1 text-lg font-bold">{entry.resultSummary}</p>
+                  <p className="mt-1 text-lg font-bold">
+                    {entry.resultSummary}
+                  </p>
                 </div>
               </div>
             </section>

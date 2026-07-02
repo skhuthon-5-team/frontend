@@ -2,10 +2,8 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
 import FormField from "../components/ui/FormField";
+import PasswordField from "../components/ui/PasswordField";
 import Button from "../components/ui/Button";
-
-const inputClass =
-  "w-full rounded-lg bg-surface-subtle px-4 py-3 text-sm text-text-default placeholder:text-text-muted focus:outline-none";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -15,10 +13,12 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
 
   const handleLogin = () => {
+    // TODO: 로그인 API 연동 후 password 검증
     login({ email });
     navigate("/");
   };
 
+  // TODO: 구글 OAuth 로그인 연동
   const handleGoogleLogin = () => {};
 
   return (
@@ -42,21 +42,18 @@ export default function LoginPage() {
             onChange={(e) => setEmail(e.target.value)}
           />
 
-          <label className="flex flex-col gap-2">
-            <span className="flex items-center justify-between">
-              <span className="text-sm font-bold text-text-strong">비밀번호</span>
-              <Link to="/login" className="text-xs text-text-muted underline">
+          <PasswordField
+            label="비밀번호"
+            placeholder="비밀번호를 입력하세요"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            action={
+              // TODO: 비밀번호 찾기 페이지 연결
+              <Link to="#" className="text-xs text-text-muted underline">
                 비밀번호를 잊으셨나요?
               </Link>
-            </span>
-            <input
-              type="password"
-              placeholder="비밀번호를 입력하세요"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className={inputClass}
-            />
-          </label>
+            }
+          />
 
           <Button variant="primary" className="w-full" onClick={handleLogin}>
             로그인하기 →

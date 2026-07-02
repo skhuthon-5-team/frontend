@@ -2,13 +2,8 @@ import { useState } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { CheckCircle2, XCircle, Loader2 } from "lucide-react";
 import { getFeeds } from "../mocks/feeds";
+import { inputOnSubtle, textareaOnSubtle } from "../styles/fieldStyles";
 import Button from "../components/ui/Button";
-
-const textareaClass =
-  "w-full resize-none rounded-xl border border-border-default bg-surface-subtle px-4 py-4 text-sm leading-6 text-text-default placeholder:text-text-muted outline-none transition-colors focus:border-text-strong focus:bg-surface-base";
-
-const inputClass =
-  "w-full rounded-xl border border-border-default bg-surface-subtle px-4 py-4 text-sm text-text-default placeholder:text-text-muted outline-none transition-colors focus:border-text-strong focus:bg-surface-base";
 
 const resultOptions = [
   { value: "success", label: "성공 / 재도전 성공", Icon: CheckCircle2 },
@@ -28,7 +23,8 @@ const questions = [
   {
     key: "action",
     title: "그 이후 실제로 무엇을 바꿨나요?",
-    description: "계획했던 행동을 실행에 옮겼는지, 혹은 다른 대안을 찾았는지 기록하세요.",
+    description:
+      "계획했던 행동을 실행에 옮겼는지, 혹은 다른 대안을 찾았는지 기록하세요.",
     placeholder:
       "예: 모든 협업 경험을 5가지 핵심 가치별로 리스트업했습니다. 또한, 모의 면접을 통해 답변의 논리적 구조를 반복 연습했습니다.",
   },
@@ -70,8 +66,7 @@ export default function RetrospectivePage() {
   const answers = { cause, action };
   const setters = { cause: setCause, action: setAction };
 
-  const canSubmit =
-    cause.trim() && action.trim() && result && advice.trim();
+  const canSubmit = cause.trim() && action.trim() && result && advice.trim();
 
   const handleSubmit = () => {
     if (!canSubmit) {
@@ -166,7 +161,7 @@ export default function RetrospectivePage() {
                     value={answers[question.key]}
                     onChange={(e) => setters[question.key](e.target.value)}
                     placeholder={question.placeholder}
-                    className={`mt-4 ${textareaClass}`}
+                    className={`mt-4 ${textareaOnSubtle}`}
                   />
                 </div>
               </div>
@@ -207,7 +202,7 @@ export default function RetrospectivePage() {
                   value={resultSummary}
                   onChange={(e) => setResultSummary(e.target.value)}
                   placeholder="구체적인 성과 한 줄 (예: B사 최종 합격 및 입사)"
-                  className={`mt-3 ${inputClass}`}
+                  className={`mt-3 ${inputOnSubtle}`}
                 />
               </div>
             </div>
@@ -229,7 +224,7 @@ export default function RetrospectivePage() {
                   value={advice}
                   onChange={(e) => setAdvice(e.target.value)}
                   placeholder="예: 면접 탈락이 당신의 실력 부족을 의미하진 않습니다. 단지 그 회사와 결이 맞지 않았을 뿐이니, 자신을 깎아내리지 마세요."
-                  className={`mt-4 ${textareaClass}`}
+                  className={`mt-4 ${textareaOnSubtle}`}
                 />
               </div>
             </div>
