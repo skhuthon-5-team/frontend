@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/ui/Button";
+import { ChevronDown } from "lucide-react";
 
 const categories = ["창업", "자기계발", "이직", "인간관계", "공부"];
 
@@ -79,9 +80,7 @@ export default function RecordCreatePage() {
               ))}
             </select>
 
-            <span className="pointer-events-none absolute right-5 top-1/2 -translate-y-1/2 text-xl text-text-muted">
-              ⌄
-            </span>
+            <ChevronDown className="pointer-events-none absolute right-5 top-1/2 h-5 w-5 -translate-y-1/2  text-text-muted" />
           </div>
         </label>
 
