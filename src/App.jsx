@@ -11,6 +11,10 @@ import SignupPage from "./pages/SignupPage";
 import SignupCompletePage from "./pages/SignupCompletePage";
 import FeedDetailPage from "./pages/FeedDetailPage";
 import HallOfFamePage from "./pages/HallOfFamePage";
+import CommunityPage from "./pages/CommunityPage";
+import CommunityWritePage from "./pages/CommunityWritePage";
+import CommunityDetailPage from "./pages/CommunityDetailPage";
+import UserProfilePage from "./pages/UserProfilePage";
 import RecordCreatePage from "./pages/RecordCreatePage";
 import RetrospectivePage from "./pages/RetrospectivePage";
 import RetrospectiveDetailPage from "./pages/RetrospectiveDetailPage";
@@ -38,6 +42,10 @@ export default function App() {
           <Route path="signup/complete" element={<SignupCompletePage />} />
           <Route path="feed/:id" element={<FeedDetailPage />} />
           <Route path="hall-of-fame" element={<HallOfFamePage />} />
+          <Route path="community" element={<CommunityPage />} />
+          <Route path="community/write" element={<CommunityWritePage />} />
+          <Route path="community/:id" element={<CommunityDetailPage />} />
+          <Route path="users/:username" element={<UserProfilePage />} />
           <Route path="record" element={<RecordCreatePage />} />
           <Route path="retrospective/:id" element={<RetrospectivePage />} />
           <Route
