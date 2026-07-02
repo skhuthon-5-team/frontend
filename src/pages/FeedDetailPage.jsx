@@ -1,33 +1,12 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, Eye, MessageCircle, Sparkles } from "lucide-react";
-import { getFeeds } from "../mocks/feeds";
+import { ArrowLeft, Heart, Sparkles } from "lucide-react";
+import {
+  getFeeds,
+  getFeedAiAnalysis,
+  getFeedComments,
+} from "../mocks/feeds";
 import Avatar from "../components/ui/Avatar";
 import Button from "../components/ui/Button";
-import TagChip from "../components/ui/TagChip";
-
-const aiAnalysis = {
-  cause:
-    "이번 실패의 핵심 원인은 역량 부족이라기보다, 준비 과정에서 우선순위와 판단 기준이 충분히 정리되지 않았던 점으로 보입니다.",
-  lesson:
-    "중요한 선택을 할 때는 감정이나 압박감에 휩쓸리기보다, 목표와 기준을 먼저 세우는 과정이 필요합니다.",
-  strategy:
-    "다음 도전에서는 바로 실행하기보다 작은 단위로 먼저 검증하고, 중간 점검 기준을 세워 진행하는 방식이 좋습니다.",
-};
-
-const comments = [
-  {
-    id: 1,
-    author: "꾸준한기록러",
-    content:
-      "저도 비슷한 경험이 있었어요. 이렇게 정리해두면 다음 선택이 훨씬 명확해질 것 같아용!",
-  },
-  {
-    id: 2,
-    author: "성장메이트",
-    content:
-      "실패를 숨기지 않고 기록했다는 점이 멋져요. 다음 도전은 더 단단해질 거예요!!!",
-  },
-];
 
 export default function FeedDetailPage() {
   const { id } = useParams();
@@ -36,80 +15,65 @@ export default function FeedDetailPage() {
   const feeds = getFeeds();
   const post = feeds.find((feed) => String(feed.id) === id) || feeds[0];
 
+  const aiAnalysis = getFeedAiAnalysis();
+  const comments = getFeedComments();
+
   const relatedFeeds = feeds
     .filter((feed) => feed.id !== post.id)
     .slice(0, 3);
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-14">
-      <button
-        type="button"
-        onClick={() => navigate(-1)}
-        className="mb-8 flex items-center gap-2 text-sm font-bold text-text-muted hover:text-text-strong"
-      >
-        <ArrowLeft size={16} />
-        목록으로 돌아가기
-      </button>
+      <div className="mb-8 flex items-center gap-3 text-sm">
+        <button
+          type="button"
+          onClick={() => navigate(-1)}
+          className="flex items-center gap-2 font-bold text-text-muted hover:text-text-strong"
+        >
+          <ArrowLeft size={16} />
+          피드로 돌아가기
+        </button>
+        <span className="text-border-default">|</span>
+        <span className="text-text-muted">{post.category}</span>
+      </div>
 
       <article>
-        <div className="flex items-center gap-2">
-          <TagChip label={post.category} tone="inverse" />
-          <span className="text-xs text-text-muted">{post.date}</span>
-        </div>
+        <span className="text-xs text-text-muted">{post.date}</span>
 
-        <h1 className="mt-5 max-w-3xl text-3xl font-bold leading-tight text-text-strong">
+        <h1 className="mt-3 max-w-3xl text-3xl font-bold leading-tight text-text-strong">
           {post.title}
         </h1>
 
-        <div className="mt-6 flex items-center justify-between border-b border-border-default pb-8">
+        <div className="mt-8 flex items-center justify-between border-b border-border-default pb-8">
           <div className="flex items-center gap-3">
             <Avatar alt={post.author} size="md" />
             <div>
               <p className="text-sm font-bold text-text-strong">
                 {post.author}
               </p>
-              <p className="text-xs text-text-muted">실패를 기록한 사람</p>
+              <p className="text-xs text-text-muted">
+                실패 기록 {post.authorRecordCount}회 · 응원 {post.authorCheers}
+              </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-4 text-xs text-text-muted">
-            <span className="flex items-center gap-1">
-              <Eye size={14} />
-              {post.views}
-            </span>
-            <span className="flex items-center gap-1">
-              <MessageCircle size={14} />
-              {post.comments}
-            </span>
-          </div>
+          <Button variant="secondary" shape="pill" className="px-5 py-2.5">
+            <Heart size={16} />
+            응원하기 {post.cheers}
+          </Button>
         </div>
 
-        <section className="py-10">
-          <p className="text-base leading-8 text-text-default">
-            {post.excerpt}
-          </p>
+        <ContentSection label="01. 실패 상황" content={post.situation} />
+        <ContentSection label="02. 당시 나의 선택" content={post.choice} />
+        <ContentSection label="03. 내가 생각하는 실패 원인" content={post.cause} />
+        <ContentSection label="04. 다음엔 무엇을 바꿀까" content={post.nextAction} />
 
-          <p className="mt-6 text-base leading-8 text-text-default">
-            당시에는 결과가 좋지 않았다는 사실에만 집중했지만, 시간이 지나고
-            돌아보니 실패의 원인은 단순히 운이 나빴기 때문만은 아니었습니다.
-            준비 과정에서 놓친 부분이 있었고, 선택의 기준도 충분히 명확하지
-            않았습니다.
-          </p>
-
-          <p className="mt-6 text-base leading-8 text-text-default">
-            이 기록은 같은 실수를 반복하지 않기 위해 남기는 정리입니다. 실패를
-            감정으로만 남기지 않고, 다음 도전을 위한 기준으로 바꾸고자 합니다.
-          </p>
-        </section>
-
-        <section className="rounded-2xl bg-surface-subtle p-6">
+        <section className="mt-10 rounded-2xl bg-surface-subtle p-6">
           <div className="flex items-center gap-2">
             <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-surface-inverse text-text-on-inverse">
               <Sparkles size={16} />
             </span>
-            <h2 className="text-lg font-bold text-text-strong">
-              AI 실패 분석
-            </h2>
+            <h2 className="text-lg font-bold text-text-strong">AI 실패 분석</h2>
           </div>
 
           <div className="mt-5 flex flex-col gap-4">
@@ -121,24 +85,21 @@ export default function FeedDetailPage() {
               title="이번 실패에서 얻은 교훈"
               content={aiAnalysis.lesson}
             />
-            <AnalysisCard
-              title="다음 도전 전략"
-              content={aiAnalysis.strategy}
-            />
+            <AnalysisCard title="다음 도전 전략" content={aiAnalysis.strategy} />
           </div>
         </section>
 
-        <section className="mt-10">
+        <section className="mt-12">
           <h2 className="text-lg font-bold text-text-strong">
             응원의 한마디
             <span className="ml-2 text-sm font-normal text-text-muted">
-              {comments.length}개
+              {post.comments}
             </span>
           </h2>
 
           <div className="mt-5 rounded-2xl border border-border-default bg-surface-base p-4 transition-colors focus-within:border-text-strong focus-within:bg-surface-subtle focus-within:shadow-sm">
             <input
-              placeholder="응원이나 조언을 남겨보세요."
+              placeholder="실패를 딛고 일어서는 이에게 따뜻한 응원을 보내주세요."
               className="w-full bg-transparent text-sm text-text-default outline-none placeholder:text-text-muted"
             />
 
@@ -156,22 +117,42 @@ export default function FeedDetailPage() {
             {comments.map((comment) => (
               <div key={comment.id} className="flex gap-3">
                 <Avatar alt={comment.author} size="sm" />
-                <div>
-                  <p className="text-sm font-bold text-text-strong">
-                    {comment.author}
-                  </p>
+                <div className="flex-1">
+                  <div className="flex items-center justify-between">
+                    <p className="text-sm font-bold text-text-strong">
+                      {comment.author}
+                    </p>
+                    <span className="text-xs text-text-muted">
+                      {comment.date}
+                    </span>
+                  </div>
                   <p className="mt-1 text-sm leading-6 text-text-default">
                     {comment.content}
                   </p>
+                  <div className="mt-2 flex items-center gap-4 text-xs text-text-muted">
+                    <button type="button" className="hover:text-text-strong">
+                      좋아요 {comment.likes}
+                    </button>
+                    <button type="button" className="hover:text-text-strong">
+                      답글 쓰기
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
+
+          <button
+            type="button"
+            className="mt-6 w-full rounded-xl border border-border-default py-3 text-sm font-bold text-text-muted hover:bg-surface-subtle hover:text-text-strong"
+          >
+            댓글 더보기 (1/3)
+          </button>
         </section>
 
         <section className="mt-12">
           <h2 className="text-lg font-bold text-text-strong">
-            비슷한 실패를 겪은 사람들
+            비슷한 실패를 극복한 이야기
           </h2>
 
           <div className="mt-5 grid gap-4 md:grid-cols-3">
@@ -181,29 +162,39 @@ export default function FeedDetailPage() {
                 to={`/feed/${feed.id}`}
                 className="rounded-2xl border border-border-default bg-surface-base p-5 transition hover:bg-surface-subtle"
               >
-                <TagChip label={feed.category} />
-                <h3 className="mt-4 text-sm font-bold leading-6 text-text-strong">
+                <p className="text-xs font-bold uppercase tracking-wider text-text-muted">
+                  {feed.category}
+                </p>
+                <h3 className="mt-3 line-clamp-2 text-sm font-bold leading-6 text-text-strong">
                   {feed.title}
                 </h3>
-                <p className="mt-2 line-clamp-2 text-xs leading-5 text-text-muted">
-                  {feed.excerpt}
-                </p>
+                <div className="mt-4 flex items-center gap-2">
+                  <Avatar alt={feed.author} size="sm" />
+                  <span className="text-xs text-text-muted">{feed.author}</span>
+                </div>
               </Link>
             ))}
           </div>
         </section>
-
-        <div className="mt-12 flex justify-center">
-          <Button
-            variant="primary"
-            className="px-8 py-4"
-            onClick={() => navigate(`/retrospective/${post.id}`)}
-          >
-            회고 작성하러 가기
-          </Button>
-        </div>
       </article>
     </div>
+  );
+}
+
+function SectionLabel({ children }) {
+  return (
+    <p className="text-xs font-bold tracking-wider text-text-muted">
+      {children}
+    </p>
+  );
+}
+
+function ContentSection({ label, content }) {
+  return (
+    <section className="border-b border-border-default py-10">
+      <SectionLabel>{label}</SectionLabel>
+      <p className="mt-4 text-base leading-8 text-text-default">{content}</p>
+    </section>
   );
 }
 
