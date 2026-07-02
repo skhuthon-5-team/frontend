@@ -137,13 +137,6 @@ export default function DashboardPage() {
                 )}
               </span>
             ))}
-            <span className="text-border-default">|</span>
-            <button
-              type="button"
-              className="flex items-center gap-1 text-text-default"
-            >
-              상세 필터
-            </button>
           </div>
         </div>
 
