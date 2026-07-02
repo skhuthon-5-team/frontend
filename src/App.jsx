@@ -10,6 +10,7 @@ import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import SignupCompletePage from "./pages/SignupCompletePage";
 import FeedDetailPage from "./pages/FeedDetailPage";
+import HallOfFamePage from "./pages/HallOfFamePage";
 import RecordCreatePage from "./pages/RecordCreatePage";
 import RetrospectivePage from "./pages/RetrospectivePage";
 import RetrospectiveDetailPage from "./pages/RetrospectiveDetailPage";
@@ -36,6 +37,7 @@ export default function App() {
           <Route path="signup" element={<SignupPage />} />
           <Route path="signup/complete" element={<SignupCompletePage />} />
           <Route path="feed/:id" element={<FeedDetailPage />} />
+          <Route path="hall-of-fame" element={<HallOfFamePage />} />
           <Route path="record" element={<RecordCreatePage />} />
           <Route path="retrospective/:id" element={<RetrospectivePage />} />
           <Route

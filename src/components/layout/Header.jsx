@@ -6,7 +6,7 @@ import Button from "../ui/Button";
 import Avatar from "../ui/Avatar";
 
 const navItems = [
-  { label: "실패 피드", to: "/feed" },
+  { label: "실패 피드", to: "/", end: true },
   { label: "명예의 전당", to: "/hall-of-fame" },
   { label: "커뮤니티", to: "/community" },
 ];
@@ -30,9 +30,12 @@ export default function Header() {
               <NavLink
                 key={item.to}
                 to={item.to}
+                end={item.end}
                 className={({ isActive }) =>
                   `text-sm transition hover:text-text-strong ${
-                    isActive ? "font-bold text-text-strong" : "text-text-default"
+                    isActive
+                      ? "font-bold text-text-strong underline underline-offset-8"
+                      : "text-text-default"
                   }`
                 }
               >
@@ -73,10 +76,13 @@ export default function Header() {
               <NavLink
                 key={item.to}
                 to={item.to}
+                end={item.end}
                 onClick={closeMenu}
                 className={({ isActive }) =>
                   `rounded-lg px-3 py-2 text-sm transition hover:bg-surface-subtle ${
-                    isActive ? "font-bold text-text-strong" : "text-text-default"
+                    isActive
+                      ? "font-bold text-text-strong underline underline-offset-8"
+                      : "text-text-default"
                   }`
                 }
               >
