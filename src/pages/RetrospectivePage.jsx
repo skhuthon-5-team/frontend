@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { CheckCircle2, XCircle, Loader2 } from "lucide-react";
 import { getFeeds } from "../mocks/feeds";
 import Button from "../components/ui/Button";
@@ -34,9 +34,29 @@ const questions = [
   },
 ];
 
+const pageCopy = {
+  new: {
+    title: "회고 이어쓰기",
+    description:
+      "상황이 달라졌다면 새로운 회고를 덧붙여 재도전의 과정을 이어가세요.",
+  },
+  edit: {
+    title: "회고록 수정하기",
+    description: "이미 작성한 회고의 내용을 다듬습니다.",
+  },
+  create: {
+    title: "회고록 작성하기",
+    description: "기록된 실패를 객관적으로 바라보고 성장의 발판으로 만듭니다.",
+  },
+};
+
 export default function RetrospectivePage() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  const mode = searchParams.get("mode") || "create";
+  const copy = pageCopy[mode] || pageCopy.create;
 
   const feeds = getFeeds();
   const record = feeds.find((feed) => String(feed.id) === id) || feeds[0];
@@ -77,10 +97,8 @@ export default function RetrospectivePage() {
     <div>
       <section className="border-b border-border-default bg-surface-subtle">
         <div className="mx-auto max-w-5xl px-4 py-20">
-          <h1 className="text-4xl font-bold text-text-strong">회고록 작성하기</h1>
-          <p className="mt-4 text-base text-text-muted">
-            기록된 실패를 객관적으로 바라보고 성장의 발판으로 만듭니다.
-          </p>
+          <h1 className="text-4xl font-bold text-text-strong">{copy.title}</h1>
+          <p className="mt-4 text-base text-text-muted">{copy.description}</p>
         </div>
       </section>
 
