@@ -12,6 +12,7 @@ import SignupCompletePage from "./pages/SignupCompletePage";
 import FeedDetailPage from "./pages/FeedDetailPage";
 import RecordCreatePage from "./pages/RecordCreatePage";
 import RetrospectivePage from "./pages/RetrospectivePage";
+import RetrospectiveDetailPage from "./pages/RetrospectiveDetailPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
 import ProfilePage from "./pages/mypage/ProfilePage";
@@ -37,6 +38,10 @@ export default function App() {
           <Route path="feed/:id" element={<FeedDetailPage />} />
           <Route path="record" element={<RecordCreatePage />} />
           <Route path="retrospective/:id" element={<RetrospectivePage />} />
+          <Route
+            path="retrospective/:id/detail"
+            element={<RetrospectiveDetailPage />}
+          />
 
           <Route path="mypage" element={<MyPageLayout />}>
             <Route index element={<ProfilePage />} />

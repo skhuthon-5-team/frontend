@@ -55,7 +55,7 @@ function WrittenCard({ post }) {
             <p className="text-xs text-text-muted">현재 상태</p>
             <p className="mt-1 text-sm font-bold text-text-strong">{post.currentStatus}</p>
           </div>
-          <Link to={`/retrospective/${post.id}`} className="shrink-0">
+          <Link to={`/retrospective/${post.id}/detail`} className="shrink-0">
             <Button variant="secondary" className="px-4 py-2 text-xs">
               상세보기
             </Button>
