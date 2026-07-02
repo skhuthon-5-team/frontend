@@ -33,7 +33,7 @@ export default function ProfilePage() {
     <div>
       <h1 className="text-2xl font-bold text-text-strong">마이 프로필</h1>
 
-      <div className="mt-8 flex items-center gap-5 rounded-2xl bg-surface-subtle p-6">
+      <div className="mt-8 flex items-center gap-4 rounded-2xl bg-surface-subtle p-4 sm:gap-5 sm:p-6">
         <div className="relative shrink-0">
           <span className="flex h-16 w-16 items-center justify-center rounded-full bg-surface-base">
             <Avatar size="lg" alt={nickname} />
@@ -42,12 +42,12 @@ export default function ProfilePage() {
             <Pencil size={14} className="text-text-default" />
           </span>
         </div>
-        <div>
+        <div className="min-w-0">
           <span className="text-xl font-bold text-text-strong">{nickname}</span>
           <p className="mt-1 text-sm text-text-default">
             {job} | 실패를 기록하며 매일 성장합니다.
           </p>
-          <div className="mt-2 flex gap-4 text-sm text-text-default">
+          <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm text-text-default">
             <span>
               팔로워{" "}
               <b className="text-text-strong">{profile.stats.followers}</b>

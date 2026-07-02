@@ -25,9 +25,11 @@ export default function AccountPage() {
 
       <div className="mt-8">
         <span className="text-sm font-bold text-text-strong">가입 이메일</span>
-        <div className="mt-2 flex items-center justify-between rounded-lg bg-surface-subtle px-4 py-3">
-          <span className="text-sm text-text-default">{email}</span>
-          <span className="rounded-md bg-surface-base px-2 py-1 text-xs text-text-muted">
+        <div className="mt-2 flex items-center justify-between gap-3 rounded-lg bg-surface-subtle px-4 py-3">
+          <span className="min-w-0 truncate text-sm text-text-default">
+            {email}
+          </span>
+          <span className="shrink-0 rounded-md bg-surface-base px-2 py-1 text-xs text-text-muted">
             기본 계정
           </span>
         </div>

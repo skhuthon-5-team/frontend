@@ -10,16 +10,16 @@ const MENU = [
 
 export default function MyPageLayout() {
   return (
-    <div className="mx-auto flex max-w-6xl gap-10 px-4 py-10">
-      <aside className="w-56 shrink-0">
-        <nav className="flex flex-col gap-1">
+    <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-6 lg:flex-row lg:gap-10 lg:py-10">
+      <aside className="lg:w-56 lg:shrink-0">
+        <nav className="-mx-4 flex gap-1 overflow-x-auto px-4 pb-1 lg:mx-0 lg:flex-col lg:overflow-visible lg:px-0 lg:pb-0">
           {MENU.map(({ to, label, end }) => (
             <NavLink
               key={to}
               to={to}
               end={end}
               className={({ isActive }) =>
-                `rounded-lg px-4 py-3 text-sm transition-colors ${
+                `shrink-0 whitespace-nowrap rounded-lg px-4 py-3 text-sm transition-colors lg:shrink ${
                   isActive
                     ? "bg-surface-subtle font-bold text-text-strong"
                     : "text-text-muted hover:text-text-default"

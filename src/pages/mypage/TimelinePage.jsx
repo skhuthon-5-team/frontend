@@ -52,8 +52,8 @@ function AiReport({ report }) {
 
 function TimelineItem({ item, isLast }) {
   return (
-    <div className="flex gap-6">
-      <div className="flex w-16 shrink-0 flex-col items-end">
+    <div className="flex gap-3 sm:gap-6">
+      <div className="flex w-12 shrink-0 flex-col items-end sm:w-16">
         <span className="text-sm font-bold text-text-strong">{item.date}</span>
       </div>
 
@@ -64,8 +64,8 @@ function TimelineItem({ item, isLast }) {
 
       <div className="min-w-0 flex-1 pb-10">
         {item.type === "success" ? (
-          <div className="rounded-2xl border border-border-default p-6">
-            <div className="flex items-center justify-between">
+          <div className="rounded-2xl border border-border-default p-4 sm:p-6">
+            <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
               <span className="rounded-md bg-surface-inverse px-2.5 py-1 text-xs font-bold text-text-on-inverse">
                 {item.badge}
               </span>
@@ -80,8 +80,8 @@ function TimelineItem({ item, isLast }) {
             <AiReport report={item.report} />
           </div>
         ) : (
-          <div className="rounded-2xl bg-surface-subtle p-6">
-            <div className="flex items-center justify-between">
+          <div className="rounded-2xl bg-surface-subtle p-4 sm:p-6">
+            <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
               <span className="rounded-md bg-surface-base px-2.5 py-1 text-xs text-text-default">
                 {item.badge}
               </span>
@@ -111,7 +111,7 @@ export default function TimelinePage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <h1 className="text-2xl font-bold text-text-strong">
           나의 성장 타임라인
         </h1>

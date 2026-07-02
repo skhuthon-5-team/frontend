@@ -5,7 +5,7 @@ import Button from "../../components/ui/Button";
 
 function UnwrittenCard({ post }) {
   return (
-    <div className="flex items-start justify-between gap-6 rounded-2xl bg-surface-subtle p-6">
+    <div className="flex flex-col items-start gap-4 rounded-2xl bg-surface-subtle p-4 sm:flex-row sm:justify-between sm:gap-6 sm:p-6">
       <div className="min-w-0">
         <p className="text-xs text-text-muted">{post.date} 기록됨</p>
         <h3 className="mt-1 text-lg font-bold text-text-strong">
